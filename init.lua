@@ -234,6 +234,25 @@ vim.opt.rtp:prepend(lazypath)
 -- NOTE: Here is where you install your plugins.
 require('lazy').setup({
   {
+    'sbdchd/neoformat',
+    config = function()
+      vim.g.neoformat_enabled_cs = { 'csharpier' }
+      vim.g.neoformat_cs_csharpier = {
+        exe = 'dotnet-csharpier',
+        args = { '--write-stdout' },
+        stdin = true,
+      }
+
+      -- Create an augroup for Neoformat on save
+      vim.api.nvim_create_augroup('fmt', { clear = true })
+      vim.api.nvim_create_autocmd('BufWritePre', {
+        group = 'fmt',
+        pattern = '*.cs',
+        command = 'undojoin | Neoformat',
+      })
+    end,
+  },
+  {
     'windwp/nvim-ts-autotag',
     lazy = false,
     config = function()
@@ -702,6 +721,7 @@ require('lazy').setup({
             },
           },
         },
+        csharpier = {},
       }
 
       -- Ensure the servers and tools above are installed
@@ -1028,5 +1048,8 @@ vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
+--
+--
+--
 --
 --
