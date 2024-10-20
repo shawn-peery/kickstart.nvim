@@ -234,8 +234,47 @@ vim.opt.rtp:prepend(lazypath)
 -- NOTE: Here is where you install your plugins.
 require('lazy').setup({
   {
+    'dense-analysis/ale',
+    config = function()
+      -- Configuration goes here.
+      local g = vim.g
+      -- Get the current process ID
+      --      local pid = vim.fn.getpid()
+
+      -- Set the ESLint executable and global usage
+      --      g.ale_javascript_eslint_executable = 'eslint_d'
+      --      g.ale_javascript_eslint_use_global = 1
+
+      -- Store the process ID in a variable (if needed)
+      --      g.ESLINT_D_PPID = pid
+      --
+      -- Force ALE to use eslint_d for linting
+      g.ale_javascript_eslint_executable = 'eslint_d'
+      g.ale_typescript_eslint_executable = 'eslint_d'
+      g.ale_javascriptreact_eslint_executable = 'eslint_d'
+      g.ale_typescriptreact_eslint_executable = 'eslint_d'
+
+      -- Configure ALE linters to use eslint (not eslint_d)
+      g.ale_linters = {
+        javascript = { 'eslint' },
+        typescript = { 'eslint' },
+        javascriptreact = { 'eslint' },
+        typescriptreact = { 'eslint' },
+      }
+
+      -- Configure ALE fixers to use eslint_d
+      g.ale_fixers = {
+        javascript = { 'eslint_d' },
+        typescript = { 'eslint_d' },
+        javascriptreact = { 'eslint_d' },
+        typescriptreact = { 'eslint_d' },
+      }
+    end,
+  },
+  {
     'sbdchd/neoformat',
     config = function()
+      -- CSharpier
       vim.g.neoformat_enabled_cs = { 'csharpier' }
       vim.g.neoformat_cs_csharpier = {
         exe = 'dotnet-csharpier',
