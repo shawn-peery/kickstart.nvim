@@ -236,6 +236,9 @@ require('lazy').setup({
   {
     'sbdchd/neoformat',
     config = function()
+      -- Use Node.js executable for Neoformat
+      vim.g.neoformat_try_node_exe = 1
+
       vim.g.neoformat_enabled_cs = { 'csharpier' }
       vim.g.neoformat_cs_csharpier = {
         exe = 'dotnet-csharpier',
@@ -248,6 +251,19 @@ require('lazy').setup({
       vim.api.nvim_create_autocmd('BufWritePre', {
         group = 'fmt',
         pattern = '*.cs',
+        command = 'undojoin | Neoformat',
+      })
+
+      vim.g.neoformat_enabled_javascript = { 'prettier' }
+      vim.g.neoformat_javascript_prettier = {
+        exe = 'prettier',
+        args = { '--write-stdout' },
+        stdin = true,
+      }
+
+      -- Create an augroup for Neoformat on save
+      vim.api.nvim_create_autocmd('BufWritePre', {
+        pattern = { '*.js', '*.jsx', '*.ts', '*.tsx' },
         command = 'undojoin | Neoformat',
       })
     end,
