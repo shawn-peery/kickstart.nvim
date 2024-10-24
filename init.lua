@@ -252,7 +252,8 @@ require('lazy').setup({
       vim.api.nvim_create_autocmd('BufWritePre', {
         group = 'fmt',
         pattern = '*.cs',
-        command = 'undojoin | Neoformat',
+        -- command = 'undojoin | Neoformat',
+        command = 'Neoformat',
       })
 
       vim.g.neoformat_enabled_javascript = { 'prettier' }
