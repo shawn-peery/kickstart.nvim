@@ -276,7 +276,8 @@ require('lazy').setup({
       -- Create an augroup for Neoformat on save
       vim.api.nvim_create_autocmd('BufWritePre', {
         pattern = { '*.js', '*.jsx', '*.ts', '*.tsx' },
-        command = 'undojoin | Neoformat',
+        -- command = 'undojoin | Neoformat',
+        command = 'Neoformat',
       })
     end,
   },
