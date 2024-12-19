@@ -234,6 +234,12 @@ vim.opt.rtp:prepend(lazypath)
 --
 -- NOTE: Here is where you install your plugins.
 require('lazy').setup({
+  'https://github.com/tpope/vim-fugitive',
+  {
+    'https://github.com/cedarbaum/fugitive-azure-devops.vim',
+
+    dependencies = { 'https://github.com/tpope/vim-fugitive' },
+  },
   {
     'HakonHarnes/img-clip.nvim',
     event = 'VeryLazy',
