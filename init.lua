@@ -754,6 +754,7 @@ require('lazy').setup({
           },
         },
         csharpier = {},
+        tailwindcss = {},
       }
 
       -- Ensure the servers and tools above are installed
