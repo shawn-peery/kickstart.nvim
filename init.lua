@@ -266,13 +266,24 @@ require('lazy').setup({
     'sbdchd/neoformat',
     config = function()
       -- Use Node.js executable for Neoformat
+      vim.g.neoformat_verbose = 1
+      -- vim.g.neoformat_run_all_formatters = 1
+
+      vim.g.neoformat_log_file = 'C:\\Users\\Shawn\\neoformat.log'
+
       vim.g.neoformat_try_node_exe = 1
 
       vim.g.neoformat_enabled_cs = { 'csharpier' }
       vim.g.neoformat_cs_csharpier = {
         exe = 'csharpier',
-        args = { '--write-stdout' },
+
+        args = { 'format' },
         stdin = true,
+        -- exe = 'csharpier',
+        -- args = { 'format', '--file', vim.fn.expand '%:p' },
+        -- stdin = true,
+        -- args = { '--write-stdout' },
+        -- stdin = true,
       }
 
       -- Create an augroup for Neoformat on save
