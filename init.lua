@@ -284,9 +284,9 @@ require('lazy').setup({
         command = 'Neoformat',
       })
 
-      vim.g.neoformat_enabled_javascript = { 'prettier' }
-      vim.g.neoformat_javascript_prettier = {
-        exe = 'prettier',
+      vim.g.neoformat_enabled_javascript = { 'prettierd' }
+      vim.g.neoformat_javascript_prettierd = {
+        exe = 'prettierd',
         args = { '--write-stdout' },
         stdin = true,
       }
