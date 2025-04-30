@@ -270,7 +270,7 @@ require('lazy').setup({
 
       vim.g.neoformat_enabled_cs = { 'csharpier' }
       vim.g.neoformat_cs_csharpier = {
-        exe = 'dotnet-csharpier',
+        exe = 'csharpier',
         args = { '--write-stdout' },
         stdin = true,
       }
