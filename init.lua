@@ -277,8 +277,15 @@ require('lazy').setup({
       vim.g.neoformat_cs_csharpier = {
         exe = 'csharpier',
 
+        -- args = { '--write-stdout', '--file', vim.fn.expand '%:p' },
+        -- args = { 'pipe-files', vim.fn.expand '%:p' },
+
+        -- args = { 'format', vim.fn.expand '%:p' },
+
         args = { 'format' },
+        -- args = { 'pipe-files', '"' .. vim.fn.expand '%:p' .. '"' },
         stdin = true,
+
         -- exe = 'csharpier',
         -- args = { 'format', '--file', vim.fn.expand '%:p' },
         -- stdin = true,
