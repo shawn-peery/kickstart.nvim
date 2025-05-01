@@ -266,23 +266,29 @@ require('lazy').setup({
     'sbdchd/neoformat',
     config = function()
       -- Use Node.js executable for Neoformat
+      -- vim.g.neoformat_verbose = 1
+      -- -- vim.g.neoformat_run_all_formatters = 1
+      --
+      -- vim.g.neoformat_log_file = 'C:\\Users\\Shawn\\neoformat.log'
+
       vim.g.neoformat_try_node_exe = 1
 
-      vim.g.neoformat_enabled_cs = { 'csharpier' }
-      vim.g.neoformat_cs_csharpier = {
-        exe = 'dotnet-csharpier',
-        args = { '--write-stdout' },
-        stdin = true,
-      }
+      -- vim.g.neoformat_enabled_cs = { 'csharpier' }
+      -- vim.g.neoformat_cs_csharpier = {
+      --   exe = 'csharpier',
+      --   args = { 'format', '--write-stdout' },
+      --   stdin = true,
+      --   no_append = true,
+      -- }
 
       -- Create an augroup for Neoformat on save
-      vim.api.nvim_create_augroup('fmt', { clear = true })
-      vim.api.nvim_create_autocmd('BufWritePre', {
-        group = 'fmt',
-        pattern = '*.cs',
-        -- command = 'undojoin | Neoformat',
-        command = 'Neoformat',
-      })
+      -- vim.api.nvim_create_augroup('fmt', { clear = true })
+      -- vim.api.nvim_create_autocmd('BufWritePre', {
+      --   group = 'fmt',
+      --   pattern = '*.cs',
+      --   -- command = 'undojoin | Neoformat',
+      --   command = 'Neoformat',
+      -- })
 
       vim.g.neoformat_enabled_javascript = { 'prettierd' }
       vim.g.neoformat_javascript_prettierd = {
@@ -292,11 +298,11 @@ require('lazy').setup({
       }
 
       -- Create an augroup for Neoformat on save
-      vim.api.nvim_create_autocmd('BufWritePre', {
-        pattern = { '*.js', '*.jsx', '*.ts', '*.tsx' },
-        -- command = 'undojoin | Neoformat',
-        command = 'Neoformat',
-      })
+      -- vim.api.nvim_create_autocmd('BufWritePre', {
+      --   pattern = { '*.js', '*.jsx', '*.ts', '*.tsx' },
+      --   -- command = 'undojoin | Neoformat',
+      --   command = 'Neoformat',
+      -- })
     end,
   },
   {
@@ -773,6 +779,19 @@ require('lazy').setup({
         },
         csharpier = {},
         tailwindcss = {},
+        csharp_ls = { -- Add csharp_ls configuration
+          cmd = { 'csharp-ls' }, -- Path to csharp-ls executable (ensure it's installed globally or specify the path)
+          settings = {
+            csharp = {
+              applyFormattingOptions = false, -- Disable formatting by the server
+            },
+          },
+          on_attach = function(client, bufnr)
+            -- Disable formatting from the language server if you want to rely on other tools (e.g., csharpier)
+            client.server_capabilities.documentFormattingProvider = false
+            client.server_capabilities.documentRangeFormattingProvider = false
+          end,
+        },
       }
 
       -- Ensure the servers and tools above are installed
