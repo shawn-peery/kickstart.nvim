@@ -1,3 +1,10 @@
+vim.api.nvim_exec(
+  [[
+  let $CC = 'clang'
+]],
+  false
+)
+
 -- Oil Setup
 --
 --
