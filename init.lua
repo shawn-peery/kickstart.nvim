@@ -376,9 +376,13 @@ require('lazy').setup({
       -- })
     end,
   },
-
-  'hadronized/hop.nvim',
-
+  {
+    'smoka7/hop.nvim',
+    version = '*',
+    opts = {
+      keys = 'etovxqpdygfblzhckisuran',
+    },
+  },
   {
     'stevearc/oil.nvim',
     opts = {},
