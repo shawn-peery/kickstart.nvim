@@ -1256,6 +1256,19 @@ mason_dap.setup {
 
 -- Configurations
 
+dap.adapters['pwa-chrome'] = {
+  type = 'server',
+  host = 'localhost',
+  port = 3000,
+  executable = {
+    command = 'node',
+    args = {
+      vim.fn.stdpath 'data' .. '/dap_adapters/js-debug/src/dapDebugServer.js',
+      '3000',
+    },
+  },
+}
+
 dap.configurations = {
   c = {
     {
