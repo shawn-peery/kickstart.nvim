@@ -1256,37 +1256,6 @@ mason_dap.setup {
 
 -- Configurations
 
--- Define a shared config table
-local js_ts_config = {
-  {
-    type = 'pwa-chrome',
-    request = 'launch',
-    name = 'Test',
-    url = 'http://localhost:3000',
-    webRoot = '${workspaceFolder}',
-    userDataDir = '${workspaceFolder}/.vscode/vscode-chrome-debug-userdatadir',
-  },
-  {
-    type = 'pwa-node',
-    request = 'launch',
-    name = 'Launch file',
-    program = '${file}',
-    cwd = '${workspaceFolder}',
-  },
-  {
-    type = 'pwa-node',
-    request = 'attach',
-    name = 'Attach to process',
-    processId = require('dap.utils').pick_process,
-    cwd = '${workspaceFolder}',
-  },
-}
-
--- Assign the same config to multiple filetypes
-for _, ft in ipairs { 'javascript', 'typescript', 'typescriptreact' } do
-  dap.configurations[ft] = js_ts_config
-end
-
 dap.configurations = {
   c = {
     {
@@ -1311,6 +1280,80 @@ dap.configurations = {
       program = function()
         return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
       end,
+    },
+  },
+  javascript = {
+    {
+      type = 'pwa-chrome',
+      request = 'launch',
+      name = 'Start Chrome with "localhost"',
+      url = 'http://localhost:3000',
+      webRoot = '${workspaceFolder}',
+      userDataDir = '${workspaceFolder}/.vscode/vscode-chrome-debug-userdatadir',
+    },
+    {
+      type = 'pwa-node',
+      request = 'launch',
+      name = 'Test 2',
+      program = '${file}',
+      cwd = '${workspaceFolder}',
+    },
+    {
+      type = 'pwa-node',
+      request = 'attach',
+      name = 'Test 3',
+      processId = require('dap.utils').pick_process,
+      cwd = '${workspaceFolder}',
+    },
+  },
+
+  typescript = {
+    {
+      type = 'pwa-chrome',
+      request = 'launch',
+      name = 'Start Chrome with "localhost"',
+      url = 'http://localhost:3000',
+      webRoot = '${workspaceFolder}',
+      userDataDir = '${workspaceFolder}/.vscode/vscode-chrome-debug-userdatadir',
+    },
+    {
+      type = 'pwa-node',
+      request = 'launch',
+      name = 'Test 2',
+      program = '${file}',
+      cwd = '${workspaceFolder}',
+    },
+    {
+      type = 'pwa-node',
+      request = 'attach',
+      name = 'Test 3',
+      processId = require('dap.utils').pick_process,
+      cwd = '${workspaceFolder}',
+    },
+  },
+
+  typescriptreact = {
+    {
+      type = 'pwa-chrome',
+      request = 'launch',
+      name = 'Start Chrome with "localhost"',
+      url = 'http://localhost:3000',
+      webRoot = '${workspaceFolder}',
+      userDataDir = '${workspaceFolder}/.vscode/vscode-chrome-debug-userdatadir',
+    },
+    {
+      type = 'pwa-node',
+      request = 'launch',
+      name = 'Test 2',
+      program = '${file}',
+      cwd = '${workspaceFolder}',
+    },
+    {
+      type = 'pwa-node',
+      request = 'attach',
+      name = 'Test 3',
+      processId = require('dap.utils').pick_process,
+      cwd = '${workspaceFolder}',
     },
   },
 }
