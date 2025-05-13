@@ -1259,7 +1259,7 @@ mason_dap.setup {
 dap.adapters.chrome = {
   type = 'executable',
   command = 'node',
-  args = { 'C:\\Users\\Shawn\\AppData\\Local\\nvim-data\\mason\\packages\\js-debug-adapter\\js-debug\\src\\dapDebugServer.js' }, -- TODO adjust
+  args = { 'C:\\Users\\Shawn\\AppData\\Local\\nvim-data\\mason\\packages\\js-debug-adapter\\js-debug\\src\\dapDebugServer.js', '9222' }, -- TODO adjust
 }
 
 -- dap.adapters['pwa-chrome'] = {
