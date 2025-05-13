@@ -1245,7 +1245,7 @@ local dap_virtual_text = require 'nvim-dap-virtual-text'
 dap_virtual_text.setup()
 
 mason_dap.setup {
-  ensure_installed = { 'cppdbg', 'js-debug-adapter' },
+  ensure_installed = { 'cppdbg', 'vscode-chrome-debug' },
   automatic_installation = true,
   handlers = {
     function(config)
@@ -1259,7 +1259,7 @@ mason_dap.setup {
 dap.adapters.chrome = {
   type = 'executable',
   command = 'node',
-  args = { 'C:\\Users\\Shawn\\AppData\\Local\\nvim-data\\mason\\packages\\js-debug-adapter\\js-debug\\src\\dapDebugServer.js', '9222' }, -- TODO adjust
+  args = { os.getenv 'HOME' .. '\\AppData\\Local\\nvim-data\\mason\\packages\\chrome-debug-adapter\\out\\src\\chromeDebug.js' }, -- TODO adjust
 }
 
 -- dap.adapters['pwa-chrome'] = {
