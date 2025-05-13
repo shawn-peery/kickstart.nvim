@@ -1256,118 +1256,35 @@ mason_dap.setup {
 
 -- Configurations
 
-dap.adapters['pwa-chrome'] = {
-  type = 'server',
-  host = 'localhost',
-  port = 3000,
-  executable = {
-    command = 'node',
-    args = {
-      vim.fn.stdpath 'data' .. '/dap_adapters/js-debug/src/dapDebugServer.js',
-      '3000',
-    },
+dap.adapters.chrome = {
+  type = 'executable',
+  command = 'node',
+  args = { 'C:\\Users\\Shawn\\AppData\\Local\\nvim-data\\mason\\packages\\js-debug-adapter\\js-debug\\src\\dapDebugServer.js' }, -- TODO adjust
+}
+
+dap.configurations.javascriptreact = { -- change this to javascript if needed
+  {
+    type = 'chrome',
+    request = 'attach',
+    program = '${file}',
+    cwd = vim.fn.getcwd(),
+    sourceMaps = true,
+    protocol = 'inspector',
+    port = 9222,
+    webRoot = '${workspaceFolder}',
   },
 }
 
-dap.configurations = {
-  c = {
-    {
-      name = 'Launch file',
-      type = 'cppdbg',
-      request = 'launch',
-      program = function()
-        return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
-      end,
-      cwd = '${workspaceFolder}',
-      stopAtEntry = false,
-      MIMode = 'lldb',
-    },
-    {
-      name = 'Attach to lldbserver :1234',
-      type = 'cppdbg',
-      request = 'launch',
-      MIMode = 'lldb',
-      miDebuggerServerAddress = 'localhost:1234',
-      miDebuggerPath = '/usr/bin/lldb',
-      cwd = '${workspaceFolder}',
-      program = function()
-        return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
-      end,
-    },
-  },
-  javascript = {
-    {
-      type = 'pwa-chrome',
-      request = 'launch',
-      name = 'Start Chrome with "localhost"',
-      url = 'http://localhost:3000',
-      webRoot = '${workspaceFolder}',
-      userDataDir = '${workspaceFolder}/.vscode/vscode-chrome-debug-userdatadir',
-    },
-    {
-      type = 'pwa-node',
-      request = 'launch',
-      name = 'Test 2',
-      program = '${file}',
-      cwd = '${workspaceFolder}',
-    },
-    {
-      type = 'pwa-node',
-      request = 'attach',
-      name = 'Test 3',
-      processId = require('dap.utils').pick_process,
-      cwd = '${workspaceFolder}',
-    },
-  },
-
-  typescript = {
-    {
-      type = 'pwa-chrome',
-      request = 'launch',
-      name = 'Start Chrome with "localhost"',
-      url = 'http://localhost:3000',
-      webRoot = '${workspaceFolder}',
-      userDataDir = '${workspaceFolder}/.vscode/vscode-chrome-debug-userdatadir',
-    },
-    {
-      type = 'pwa-node',
-      request = 'launch',
-      name = 'Test 2',
-      program = '${file}',
-      cwd = '${workspaceFolder}',
-    },
-    {
-      type = 'pwa-node',
-      request = 'attach',
-      name = 'Test 3',
-      processId = require('dap.utils').pick_process,
-      cwd = '${workspaceFolder}',
-    },
-  },
-
-  typescriptreact = {
-    {
-      type = 'pwa-chrome',
-      request = 'launch',
-      name = 'Start Chrome with "localhost"',
-      url = 'http://localhost:3000',
-      webRoot = '${workspaceFolder}',
-      userDataDir = '${workspaceFolder}/.vscode/vscode-chrome-debug-userdatadir',
-    },
-    {
-      type = 'pwa-node',
-      request = 'launch',
-      name = 'Test 2',
-      program = '${file}',
-      cwd = '${workspaceFolder}',
-    },
-    {
-      type = 'pwa-node',
-      request = 'attach',
-      name = 'Test 3',
-      processId = require('dap.utils').pick_process,
-      cwd = '${workspaceFolder}',
-    },
+dap.configurations.typescriptreact = { -- change to typescript if needed
+  {
+    type = 'chrome',
+    request = 'attach',
+    program = '${file}',
+    cwd = vim.fn.getcwd(),
+    sourceMaps = true,
+    protocol = 'inspector',
+    port = 9222,
+    webRoot = '${workspaceFolder}',
   },
 }
 
