@@ -1270,7 +1270,7 @@ dap.configurations.javascriptreact = { -- change this to javascript if needed
     cwd = vim.fn.getcwd(),
     sourceMaps = true,
     protocol = 'inspector',
-    port = 9222,
+    8123,
     webRoot = '${workspaceFolder}',
   },
 }
@@ -1283,7 +1283,7 @@ dap.configurations.typescriptreact = { -- change to typescript if needed
     cwd = vim.fn.getcwd(),
     sourceMaps = true,
     protocol = 'inspector',
-    port = 9222,
+    8123,
     webRoot = '${workspaceFolder}',
   },
 }
