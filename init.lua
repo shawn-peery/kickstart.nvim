@@ -1153,4 +1153,25 @@ vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
 --
 --
 --
---
+-- DEBUGGERS
+
+local dap = require 'dap'
+
+dap.configurations.javascript = {
+  {
+    type = 'pwa-node',
+    request = 'launch',
+    name = 'Launch file',
+    program = '${file}',
+    cwd = '${workspaceFolder}',
+  },
+  {
+    type = 'pwa-node',
+    request = 'attach',
+    name = 'Attach to process',
+    processId = require('dap.utils').pick_process,
+    cwd = '${workspaceFolder}',
+  },
+}
+
+dap.configurations.typescript = dap.configurations.javascript
