@@ -1126,3 +1126,11 @@ vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
 --
 --
 --
+--
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'gitcommit',
+  callback = function()
+    vim.opt_local.colorcolumn = '50,72'
+    vim.api.nvim_set_hl(0, 'gitcommitOverflow', { fg = '#ff5555', bold = true })
+  end,
+})
