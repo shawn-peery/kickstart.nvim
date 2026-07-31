@@ -1216,3 +1216,6 @@ if vim.fn.has 'win32' == 1 then
   vim.opt.shellquote = ''
   vim.opt.shellxquote = ''
 end
+
+-- Replace hyphens with spaces in visual selection (kebab-case to spaces)
+vim.keymap.set('v', '<leader>ks', ':s/-//g<Left>', { desc = '[K]ebab to [S]pace' })
