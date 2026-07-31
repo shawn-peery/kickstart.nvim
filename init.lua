@@ -200,6 +200,10 @@ vim.keymap.set('n', '<leader>gd', '<cmd>Gdiffsplit<CR>', { desc = '[G]it [D]iff'
 vim.keymap.set('n', '<leader>ga', '<cmd>Git add %<CR>', { desc = '[G]it [A]dd current file' })
 vim.keymap.set('n', '<leader>gu', '<cmd>Git reset %<CR>', { desc = '[G]it [U]nstage current file' })
 vim.keymap.set('n', '<leader>gg', '<cmd>Git<CR>', { desc = '[G]it [G]eneral status' })
+-- Branch Keymaps
+vim.keymap.set('n', '<leader>gb', '<cmd>Git branch -a<CR>', { desc = '[G]it [B]ranches' })
+vim.keymap.set('n', '<leader>gn', ':Git checkout -b ', { desc = '[G]it [N]ew branch' })
+vim.keymap.set('n', '<leader>go', ':Git checkout ', { desc = '[G]it Check[O]ut branch' })
 
 vim.keymap.set('n', '<leader>gk', function()
   local repo = vim.fn.systemlist('git rev-parse --show-toplevel')[1]
