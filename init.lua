@@ -201,6 +201,13 @@ vim.keymap.set('n', '<leader>ga', '<cmd>Git add %<CR>', { desc = '[G]it [A]dd cu
 vim.keymap.set('n', '<leader>gu', '<cmd>Git reset %<CR>', { desc = '[G]it [U]nstage current file' })
 vim.keymap.set('n', '<leader>gg', '<cmd>Git<CR>', { desc = '[G]it [G]eneral status' })
 
+vim.keymap.set('n', '<leader>gk', function()
+  local repo = vim.fn.systemlist('git rev-parse --show-toplevel')[1]
+  if repo and repo ~= '' then
+    vim.fn.jobstart({ 'gitkraken', repo }, { detach = true })
+  end
+end, { desc = '[G]it [K]raken' })
+
 -- TIP: Disable arrow keys in normal mode
 -- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
 -- vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
@@ -1160,11 +1167,30 @@ vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
 --
 --
 --
+-- vim.api.nvim_create_autocmd('FileType', {
+--   pattern = 'gitcommit',
+--   callback = function()
+--     vim.opt_local.colorcolumn = '50,72'
+--     vim.api.nvim_set_hl(0, 'gitcommitOverflow', { fg = '#ff5555', bold = true })
+--   end,
+-- })
+--
+--
+
 vim.api.nvim_create_autocmd('FileType', {
   pattern = 'gitcommit',
   callback = function()
+    -- Keeps vertical guide columns at 50 and 72
     vim.opt_local.colorcolumn = '50,72'
-    vim.api.nvim_set_hl(0, 'gitcommitOverflow', { fg = '#ff5555', bold = true })
+
+    -- Sets the vertical guide bar color
+    vim.api.nvim_set_hl(0, 'ColorColumn', { bg = '#332222' })
+
+    -- 1. Red text past column 50 on Line 1 (Summary overflow)
+    vim.fn.matchadd('ErrorMsg', '\\%1l\\%>50v.*')
+
+    -- 2. Red text for ANY character on Line 2 (Line 2 must stay blank!)
+    vim.fn.matchadd('ErrorMsg', '\\%2l.*')
   end,
 })
 
