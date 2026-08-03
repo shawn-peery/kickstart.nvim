@@ -195,13 +195,13 @@ vim.keymap.set('n', '<leader>gs', '<cmd>Git<CR>', { desc = '[G]it [S]tatus' })
 vim.keymap.set('n', '<leader>gc', '<cmd>Git commit<CR>', { desc = '[G]it [C]ommit' })
 vim.keymap.set('n', '<leader>gp', '<cmd>Git push<CR>', { desc = '[G]it [P]ush' })
 vim.keymap.set('n', '<leader>gl', '<cmd>Git log<CR>', { desc = '[G]it [L]og' })
-vim.keymap.set('n', '<leader>gb', '<cmd>Git blame<CR>', { desc = '[G]it [B]lame' })
+vim.keymap.set('n', '<leader>gb', '<cmd>Git blame<CR>', { desc = '[G]it [b]lame' })
 vim.keymap.set('n', '<leader>gd', '<cmd>Gdiffsplit<CR>', { desc = '[G]it [D]iff' })
 vim.keymap.set('n', '<leader>ga', '<cmd>Git add %<CR>', { desc = '[G]it [A]dd current file' })
 vim.keymap.set('n', '<leader>gu', '<cmd>Git reset %<CR>', { desc = '[G]it [U]nstage current file' })
 vim.keymap.set('n', '<leader>gg', '<cmd>Git<CR>', { desc = '[G]it [G]eneral status' })
 -- Branch Keymaps
-vim.keymap.set('n', '<leader>gb', '<cmd>Git branch -a<CR>', { desc = '[G]it [B]ranches' })
+vim.keymap.set('n', '<leader>gB', '<cmd>Git branch -a<CR>', { desc = '[G]it [B]ranches' })
 vim.keymap.set('n', '<leader>gn', ':Git checkout -b ', { desc = '[G]it [N]ew branch' })
 vim.keymap.set('n', '<leader>go', ':Git checkout ', { desc = '[G]it Check[O]ut branch' })
 
@@ -440,7 +440,7 @@ require('lazy').setup({
   --    require('Comment').setup({})
 
   -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim', opts = {} },
+  { 'numToStr/Comment.nvim',    opts = {} },
 
   -- Here is a more advanced example where we pass configuration
   -- options to `gitsigns.nvim`. This is equivalent to the following Lua:
@@ -475,7 +475,7 @@ require('lazy').setup({
   -- after the plugin has been loaded:
   --  config = function() ... end
 
-  { -- Useful plugin to show you pending keybinds.
+  {                     -- Useful plugin to show you pending keybinds.
     'folke/which-key.nvim',
     event = 'VimEnter', -- Sets the loading event to 'VimEnter'
     config = function() -- This is the function that runs, AFTER loading
@@ -483,20 +483,20 @@ require('lazy').setup({
 
       -- Document existing key chains
       require('which-key').add {
-        { '<leader>c', group = '[C]ode' },
+        { '<leader>c',  group = '[C]ode' },
         { '<leader>c_', hidden = true },
-        { '<leader>d', group = '[D]ocument' },
+        { '<leader>d',  group = '[D]ocument' },
         { '<leader>d_', hidden = true },
-        { '<leader>g', group = '[G]it' },
-        { '<leader>h', group = 'Git [H]unk' },
+        { '<leader>g',  group = '[G]it' },
+        { '<leader>h',  group = 'Git [H]unk' },
         { '<leader>h_', hidden = true },
-        { '<leader>r', group = '[R]ename' },
+        { '<leader>r',  group = '[R]ename' },
         { '<leader>r_', hidden = true },
-        { '<leader>s', group = '[S]earch' },
+        { '<leader>s',  group = '[S]earch' },
         { '<leader>s_', hidden = true },
-        { '<leader>t', group = '[T]oggle' },
+        { '<leader>t',  group = '[T]oggle' },
         { '<leader>t_', hidden = true },
-        { '<leader>w', group = '[W]orkspace' },
+        { '<leader>w',  group = '[W]orkspace' },
         { '<leader>w_', hidden = true },
       }
     end,
@@ -531,7 +531,7 @@ require('lazy').setup({
       { 'nvim-telescope/telescope-ui-select.nvim' },
 
       -- Useful for getting pretty icons, but requires a Nerd Font.
-      { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
+      { 'nvim-tree/nvim-web-devicons',            enabled = vim.g.have_nerd_font },
     },
     config = function()
       -- Telescope is a fuzzy finder that comes with a lot of different things that
@@ -797,6 +797,13 @@ require('lazy').setup({
 
         --
 
+        roslyn_ls = {
+          on_attach = function(client, bufnr)
+            client.server_capabilities.documentFormattingProvider = false
+            client.server_capabilities.documentRangeFormattingProvider = false
+          end,
+        },
+
         lua_ls = {
           -- cmd = {...},
           -- filetypes = { ...},
@@ -832,10 +839,10 @@ require('lazy').setup({
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
       require('mason-lspconfig').setup {
-        ensure_installed = { 'ts_ls' },
+        ensure_installed = { 'ts_ls', 'roslyn_ls' },
         handlers = {
           function(server_name)
-            local server = {}
+            local server = servers[server_name] or {}
 
             if server_name == 'ts_ls' then
               server.on_attach = function(client, bufnr)
@@ -859,26 +866,26 @@ require('lazy').setup({
       {
         '<leader>f',
         function()
-          require('conform').format { async = true, lsp_fallback = true }
+          require('conform').format { async = true, lsp_fallback = false }
         end,
         mode = '',
         desc = '[F]ormat buffer',
       },
     },
     opts = {
-      notify_on_error = false,
+      notify_on_error = true,
       format_on_save = function(bufnr)
         -- Disable "format_on_save lsp_fallback" for languages that don't
         -- have a well standardized coding style. You can add additional
         -- languages here or re-enable it for the disabled ones.
         local disable_filetypes = { c = true, cpp = true }
         return {
-          timeout_ms = 500,
+          timeout_ms = 30000,
           lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
         }
       end,
       formatters_by_ft = {
-        lua = { 'stylua' },
+        cs = { 'csharpier' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
@@ -1055,7 +1062,7 @@ require('lazy').setup({
             local location = MiniStatusline.section_location { trunc_width = 75 }
 
             return MiniStatusline.combine_groups {
-              { hl = mode_hl, strings = { mode } },
+              { hl = mode_hl,                 strings = { mode } },
               { hl = 'MiniStatuslineDevinfo', strings = { git } },
               '%<',
               { hl = 'MiniStatuslineFilename', strings = { filename } },
@@ -1210,7 +1217,7 @@ vim.api.nvim_create_autocmd('FileType', {
 if vim.fn.has 'win32' == 1 then
   vim.opt.shell = 'pwsh'
   vim.opt.shellcmdflag =
-    '-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;'
+  '-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;'
   vim.opt.shellredir = '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode'
   vim.opt.shellpipe = '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode'
   vim.opt.shellquote = ''
