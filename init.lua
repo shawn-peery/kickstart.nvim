@@ -292,49 +292,6 @@ require('lazy').setup({
     end,
   },
   {
-    'sbdchd/neoformat',
-    config = function()
-      -- Use Node.js executable for Neoformat
-      -- vim.g.neoformat_verbose = 1
-      -- -- vim.g.neoformat_run_all_formatters = 1
-      --
-      -- vim.g.neoformat_log_file = 'C:\\Users\\Shawn\\neoformat.log'
-
-      vim.g.neoformat_try_node_exe = 1
-
-      -- vim.g.neoformat_enabled_cs = { 'csharpier' }
-      -- vim.g.neoformat_cs_csharpier = {
-      --   exe = 'csharpier',
-      --   args = { 'format', '--write-stdout' },
-      --   stdin = true,
-      --   no_append = true,
-      -- }
-
-      -- Create an augroup for Neoformat on save
-      -- vim.api.nvim_create_augroup('fmt', { clear = true })
-      -- vim.api.nvim_create_autocmd('BufWritePre', {
-      --   group = 'fmt',
-      --   pattern = '*.cs',
-      --   -- command = 'undojoin | Neoformat',
-      --   command = 'Neoformat',
-      -- })
-
-      vim.g.neoformat_enabled_javascript = { 'prettierd' }
-      vim.g.neoformat_javascript_prettierd = {
-        exe = 'prettierd',
-        args = { '--write-stdout' },
-        stdin = true,
-      }
-
-      -- Create an augroup for Neoformat on save
-      -- vim.api.nvim_create_autocmd('BufWritePre', {
-      --   pattern = { '*.js', '*.jsx', '*.ts', '*.tsx' },
-      --   -- command = 'undojoin | Neoformat',
-      --   command = 'Neoformat',
-      -- })
-    end,
-  },
-  {
     'windwp/nvim-ts-autotag',
     lazy = false,
     config = function()
@@ -440,7 +397,7 @@ require('lazy').setup({
   --    require('Comment').setup({})
 
   -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim',    opts = {} },
+  { 'numToStr/Comment.nvim', opts = {} },
 
   -- Here is a more advanced example where we pass configuration
   -- options to `gitsigns.nvim`. This is equivalent to the following Lua:
@@ -475,7 +432,7 @@ require('lazy').setup({
   -- after the plugin has been loaded:
   --  config = function() ... end
 
-  {                     -- Useful plugin to show you pending keybinds.
+  { -- Useful plugin to show you pending keybinds.
     'folke/which-key.nvim',
     event = 'VimEnter', -- Sets the loading event to 'VimEnter'
     config = function() -- This is the function that runs, AFTER loading
@@ -483,20 +440,20 @@ require('lazy').setup({
 
       -- Document existing key chains
       require('which-key').add {
-        { '<leader>c',  group = '[C]ode' },
+        { '<leader>c', group = '[C]ode' },
         { '<leader>c_', hidden = true },
-        { '<leader>d',  group = '[D]ocument' },
+        { '<leader>d', group = '[D]ocument' },
         { '<leader>d_', hidden = true },
-        { '<leader>g',  group = '[G]it' },
-        { '<leader>h',  group = 'Git [H]unk' },
+        { '<leader>g', group = '[G]it' },
+        { '<leader>h', group = 'Git [H]unk' },
         { '<leader>h_', hidden = true },
-        { '<leader>r',  group = '[R]ename' },
+        { '<leader>r', group = '[R]ename' },
         { '<leader>r_', hidden = true },
-        { '<leader>s',  group = '[S]earch' },
+        { '<leader>s', group = '[S]earch' },
         { '<leader>s_', hidden = true },
-        { '<leader>t',  group = '[T]oggle' },
+        { '<leader>t', group = '[T]oggle' },
         { '<leader>t_', hidden = true },
-        { '<leader>w',  group = '[W]orkspace' },
+        { '<leader>w', group = '[W]orkspace' },
         { '<leader>w_', hidden = true },
       }
     end,
@@ -531,7 +488,7 @@ require('lazy').setup({
       { 'nvim-telescope/telescope-ui-select.nvim' },
 
       -- Useful for getting pretty icons, but requires a Nerd Font.
-      { 'nvim-tree/nvim-web-devicons',            enabled = vim.g.have_nerd_font },
+      { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
     },
     config = function()
       -- Telescope is a fuzzy finder that comes with a lot of different things that
@@ -885,6 +842,7 @@ require('lazy').setup({
         }
       end,
       formatters_by_ft = {
+        lua = { 'stylua' },
         cs = { 'csharpier' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
@@ -1024,6 +982,137 @@ require('lazy').setup({
     end,
   },
 
+  {
+    'ellisonleao/gruvbox.nvim',
+    priority = 1000,
+  },
+
+  {
+    'rebelot/kanagawa.nvim',
+    priority = 1000,
+  },
+
+  {
+    'catppuccin/nvim',
+    name = 'catppuccin',
+    priority = 1000,
+  },
+
+  {
+    'EdenEast/nightfox.nvim',
+    priority = 1000,
+  },
+
+  {
+    'folke/tokyonight.nvim',
+    priority = 1000,
+  },
+
+  {
+    'rose-pine/neovim',
+    name = 'rose-pine',
+    priority = 1000,
+  },
+
+  {
+    'sainnhe/everforest',
+    priority = 1000,
+  },
+
+  {
+    'sainnhe/gruvbox-material',
+    priority = 1000,
+  },
+
+  {
+    'sainnhe/sonokai',
+    priority = 1000,
+  },
+
+  {
+    'shaunsingh/nord.nvim',
+    priority = 1000,
+  },
+
+  {
+    'Mofiqul/dracula.nvim',
+    priority = 1000,
+  },
+
+  {
+    'Mofiqul/vscode.nvim',
+    priority = 1000,
+  },
+
+  {
+    'projekt0n/github-nvim-theme',
+    priority = 1000,
+  },
+
+  {
+    'navarasu/onedark.nvim',
+    priority = 1000,
+  },
+
+  {
+    'olimorris/onedarkpro.nvim',
+    priority = 1000,
+  },
+
+  {
+    'marko-cerovac/material.nvim',
+    priority = 1000,
+  },
+
+  {
+    'craftzdog/solarized-osaka.nvim',
+    priority = 1000,
+  },
+
+  {
+    'maxmx03/fluoromachine.nvim',
+    priority = 1000,
+  },
+  {
+    'bluz71/vim-nightfly-colors',
+    priority = 1000,
+  },
+
+  {
+    'bluz71/vim-moonfly-colors',
+    priority = 1000,
+  },
+
+  {
+    'projekt0n/github-nvim-theme',
+    priority = 1000,
+  },
+
+  {
+    'tjdevries/colorbuddy.nvim',
+    priority = 1000,
+  },
+
+  {
+    'Shatur/neovim-ayu',
+    priority = 1000,
+  },
+
+  {
+    'AlexvZyl/nordic.nvim',
+    priority = 1000,
+  },
+
+  {
+    'rebelot/kanagawa.nvim',
+    priority = 1000,
+  },
+
+  {
+    'ramojus/mellifluous.nvim',
+    priority = 1000,
+  },
+
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
 
@@ -1062,7 +1151,7 @@ require('lazy').setup({
             local location = MiniStatusline.section_location { trunc_width = 75 }
 
             return MiniStatusline.combine_groups {
-              { hl = mode_hl,                 strings = { mode } },
+              { hl = mode_hl, strings = { mode } },
               { hl = 'MiniStatuslineDevinfo', strings = { git } },
               '%<',
               { hl = 'MiniStatuslineFilename', strings = { filename } },
@@ -1217,7 +1306,7 @@ vim.api.nvim_create_autocmd('FileType', {
 if vim.fn.has 'win32' == 1 then
   vim.opt.shell = 'pwsh'
   vim.opt.shellcmdflag =
-  '-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;'
+    '-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;'
   vim.opt.shellredir = '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode'
   vim.opt.shellpipe = '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode'
   vim.opt.shellquote = ''
@@ -1226,3 +1315,5 @@ end
 
 -- Convert kebab-case selection to space-separated text
 vim.keymap.set('v', '<leader>ks', ':s/-/ /g<CR>', { desc = '[K]ebab to [S]pace' })
+
+vim.opt.exrc = true
