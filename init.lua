@@ -447,6 +447,8 @@ require('lazy').setup({
         { '<leader>g', group = '[G]it' },
         { '<leader>h', group = 'Git [H]unk' },
         { '<leader>h_', hidden = true },
+        { '<leader>m', group = '[M]arkdown' },
+        { '<leader>m_', hidden = true },
         { '<leader>r', group = '[R]ename' },
         { '<leader>r_', hidden = true },
         { '<leader>s', group = '[S]earch' },
@@ -1320,3 +1322,15 @@ end
 vim.keymap.set('v', '<leader>ks', ':s/-/ /g<CR>', { desc = '[K]ebab to [S]pace' })
 
 vim.opt.exrc = true
+
+vim.keymap.set('n', '<leader>mp', '<cmd>MarkdownPreview<CR>', {
+  desc = 'Preview',
+})
+
+vim.keymap.set('n', '<leader>mt', '<cmd>MarkdownPreviewToggle<CR>', {
+  desc = 'Toggle Preview',
+})
+
+vim.keymap.set('n', '<leader>ms', '<cmd>MarkdownPreviewStop<CR>', {
+  desc = 'Stop Preview',
+})
