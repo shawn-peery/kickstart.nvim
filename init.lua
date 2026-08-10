@@ -350,8 +350,8 @@ require('lazy').setup({
     config = function()
       -- Setup orgmode
       require('orgmode').setup {
-        org_agenda_files = 'C:\\Users\\Shawn\\OneDrive - squarehook.com\\Notes\\Org-Mode\\**',
-        org_default_notes_file = 'C:\\Users\\Shawn\\OneDrive - squarehook.com\\Notes\\Org-Mode\\refile.org',
+        org_agenda_files = 'C:\\Users\\rocke\\Documents\\Notes\\Org-Mode\\**',
+        org_default_notes_file = 'C:\\Users\\Shawn\\Documents\\Notes\\Org-Mode\\refile.org',
       }
 
       -- NOTE: If you are using nvim-treesitter with `ensure_installed = "all"` option
